@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.AdminDao">
+
+    <cache type="com.baizhi.util.AdminRedisCeche"></cache>
+
+    <!--登录-->
+    <select id="queryAdmin" resultType="Admin">
+        select * from admin where name=#{name}
+    </select>
+    <!--添加-->
+    <insert id="insertSup">
+        insert into supplier (id,name,leader,phone) values (#{id},#{name},#{leader},#{phone});
+    </insert>
+    <!--删除-->
+    <delete id="deleteSup">
+        delete from supplier where id=#{id}
+    </delete>
+    <!--修改-->
+    <update id="updateSup">
+        update supplier set name=#{name},leader=#{leader},phone=#{phone}  where id=#{id}
+    </update>
+    <!--查询id-->
+    <select id="queryId" resultType="Supplier">
+        select * from supplier where id=#{id}
+    </select>
+    <!--展示所有-->
+    <select id="querySup" resultType="Supplier">
+        select * from supplier
+    </select>
+    <!--分页-->
+    <select id="queryCount" resultType="Supplier">
+        select * from supplier limit #{count},#{number}
+    </select>
+    <!--搜索  根据名称,用户名，电话模糊查询-->
+    <select id="queryLike" resultType="Supplier">
+        select * from supplier
+        <where>
+            <if test="key=='name'">
+                name like '%${content}%'
+            </if>
+            <if test="key=='leader'">
+                leader like '%${content}%'
+            </if>
+            <if test="key=='phone'">
+                phone like '%${content}%'
+            </if>
+        </where>
+    </select>
+    <!---->
+    <!---->
+</mapper>

@@ -19,7 +19,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class AdminAction {
-
+//这是在geihub中的第一次修改
     @Autowired
     private AdminService service;
     //登录
